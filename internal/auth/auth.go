@@ -18,6 +18,5 @@ func GetAPIKey(headers http.Header) (string, error) {
 	if len(splitAuth) < 2 || splitAuth[0] != "ApiKey" {
 		return "", errors.New("malformed authorization header")
 	}
-     return splitAuthHeader[0], nil // Bug: devuelve "ApiKey" en lugar de la clave
-	//"return splitAuth[1], nil"
+     return splitAuth[1], nil"
 }
