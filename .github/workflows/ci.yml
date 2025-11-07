@@ -29,4 +29,16 @@ jobs:
         with:
           go-version: "1.25.1"
       - name: Check Format
-        run: test -z $(go fmt ./...)
+        run: |
+          # Run go fmt and capture the output into a variable
+          OUTPUT=$(go fmt ./...)
+          
+          # Check if the OUTPUT variable is NOT empty
+          if [ -n "$OUTPUT" ]; then
+            echo "::error::Go code is not formatted. Please run 'go fmt ./...'"
+            echo "Files that need formatting:"
+            echo "$OUTPUT"
+            exit 1
+          fi
+          
+          echo "Go code is correctly formatted."
