@@ -4,8 +4,8 @@ on:
   pull_request:
     branches: [main]
 
-jobs: # <-- Clave principal de trabajos
-  tests: # <-- Primer trabajo
+jobs: # <-- Clave principal de trabajos (¡No duplicar ni anidar!)
+  tests:
     name: Tests
     runs-on: ubuntu-latest
     steps:
@@ -15,12 +15,12 @@ jobs: # <-- Clave principal de trabajos
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "stable" # Usa 'stable' para asegurar compatibilidad si no sabes la versión exacta
+          go-version: "1.25.1" # Mantén la versión que usaste originalmente
 
       - name: Run Tests
         run: go test ./... -cover
 
-  estilo: # <-- Segundo trabajo, al mismo nivel que 'tests'
+  estilo: # <-- El nuevo trabajo, al mismo nivel que 'tests'
     name: Estilo
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +30,7 @@ jobs: # <-- Clave principal de trabajos
       - uses: actions/setup-go@v5
         name: Set up Go
         with:
-          go-version: 'stable' # También usa 'stable' aquí
+          go-version: '1.25.1' # Mantén la misma versión
 
       - name: Check Format
         run: test -z $(go fmt ./...)
