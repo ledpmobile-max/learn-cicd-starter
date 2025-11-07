@@ -1,4 +1,4 @@
-name: ci
+name: CI
 
 on:
   pull_request:
@@ -15,22 +15,28 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.24.10" # <-- CORREGIDO A TU VERSIÓN LOCAL
+          go-version: "1.24.10"
 
       - name: Run Tests
         run: go test ./... -cover
 
-  estilo:
-    name: Estilo
+  style:
+    name: Style
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        name: Check out code
-      
-      - uses: actions/setup-go@v5
-        name: Set up Go
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.24.10' # <-- CORREGIDO A TU VERSIÓN LOCAL
+          go-version: "1.24.10"
 
       - name: Check Format
-        run: test -z $(go fmt ./...)
+        run: |
+          UNFORMATTED=$(gofmt -l .)
+          if [ -n "$UNFORMATTED" ]; then
+            echo "These files are not properly formatted:"
+            echo "$UNFORMATTED"
+            exit 1
+          fi
