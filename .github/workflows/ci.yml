@@ -9,20 +9,24 @@ jobs:
     name: Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
           go-version: "1.24.10"
       - name: Run Tests
         run: go test ./... -cover
 
-  estilo:
-    name: Estilo
+  style:  
+    name: Style
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.24.10'
+          go-version: "1.24.10"
       - name: Check Format
         run: test -z $(go fmt ./...)
