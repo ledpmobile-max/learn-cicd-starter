@@ -8,7 +8,6 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -20,6 +19,7 @@ jobs:
 
       - name: Run Tests
         run: go test ./... -cover
+
   estilo:
     name: Estilo
     runs-on: ubuntu-latest
