@@ -6,6 +6,14 @@ import (
 	"net/http"
 )
 
+func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+
+	if err := json.NewEncoder(w).Encode(payload); err != nil {
+		log.Printf("Failed to encode JSON response: %v", err)
+	}
+}
 func respondWithError(w http.ResponseWriter, code int, msg string, logErr error) {
 	if logErr != nil {
 		log.Println(logErr)
