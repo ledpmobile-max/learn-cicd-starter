@@ -34,3 +34,17 @@ jobs:
         run: staticcheck ./...
       - name: Check Format
         run: test -z $(go fmt ./...)
+  security:
+    name: Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.5"      
+      - name: Install Gosec
+        run: go install github.com/securego/gosec/v2/cmd/gosec@lates        
+      - name: Run Gosec # Ejecuta el análisis de seguridad
+        run: gosec ./...
