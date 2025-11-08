@@ -20,4 +20,3 @@ func respondWithError(w http.ResponseWriter, code int, msg string, logErr error)
 		Error: msg,
 	})
 }
-git pu
