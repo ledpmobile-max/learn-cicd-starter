@@ -29,9 +29,8 @@ func (cfg *apiConfig) handlerNotesCreate(w http.ResponseWriter, r *http.Request,
 	type parameters struct {
 		Note string `json:"note"`
 	}
-	decoder := json.NewDecoder(r.Body)
 	params := parameters{}
-	err := decoder.Decode(&params)
+	err := json.NewDecoder(r.Body).Decode(&params)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Couldn't decode parameters", err)
 		return
