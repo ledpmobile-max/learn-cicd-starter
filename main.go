@@ -9,7 +9,6 @@ import (
 	"os"
 	"time"
 
-
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
